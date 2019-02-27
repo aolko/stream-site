@@ -59,8 +59,7 @@ if (in_array($subemail, $subarray->subscribed)) {
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900' rel='stylesheet'
 		  type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/js/vjs/video-js.css">
-	<link rel="stylesheet" type="text/css" href="/js/vjs/videojs-qualityselector.css">
+    <link rel="stylesheet" type="text/css" href="/js/vjs/7.2.3/video-js.min.css">
 	<link rel="stylesheet" type="text/css" href="/js/vjs/video-js-skin.css">
 	<link rel="stylesheet" href="/css/application.css">
 	<link rel="stylesheet" href="/css/site.css">
@@ -149,21 +148,21 @@ if (in_array($subemail, $subarray->subscribed)) {
 
 	</main>
 </div>
-<script src="/js/material.js"></script>
+<script src="/js/material.1.3.0.js"></script>
 <script src="/js/getmdl-select.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jqui/jquery-ui.min.js"></script>
-<script src="/js/vjs/videojs-5.14.1.js"></script>
+<script src="/js/vjs/7.2.3/video.min.js"></script>
+<script src="/js/vjs/tech/videojs-flvjs.min.js"></script>
 <script src="/js/vjs/videojs-persistvolume.js"></script>
-<script src="/js/vjs/videojs-contrib-hls.min.js"></script>
 <script type='text/javascript'>
 	var popoutPlayer = videojs('popoutPlayer', {
-		techOrder: ['flash'],
-		sources: [{
-			src: 'rtmp://<?= $surl ?>/live&<?= $streamkey ?>',
-			type: 'rtmp/flv',
-			label: 'Flash'
-		}],
+        techOrder: ['html5', 'flvjs'],
+        sources: [{
+            src: '<?= $furl ?>/flv-live?port=1935&app=live&stream=<?= $streamkey ?>',
+            type: 'video/flv',
+            label: 'HTTP-FLV'
+        }]
 	});
 	popoutPlayer.persistvolume({namespace: "Rachni-Volume-Control"});
 	var api_key = "<?= $accountinfo['api_key'] ?>";
